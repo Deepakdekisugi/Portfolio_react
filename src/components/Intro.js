@@ -63,23 +63,49 @@ const Text = styled.div`
 
 const Button = styled.a`
   text-decoration: none;
-  font-size: calc(0.8rem + 0.5vw);
-  font-weight: 500;
+  font-size: calc(0.6rem + 0.3vw);
+  font-weight: 600;
   color: ${(props) => props.theme.body};
-  background-color: ${(props) => props.theme.text};
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
   text-align: center;
-  margin-top: 1rem;
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  
+  margin: 0.4rem auto 0;
+  width: fit-content;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease-in-out;
+  border: 2px solid transparent;
+
+  /* Inner Pulsating Glow */
+  &:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    opacity: 0.3;
+    filter: blur(15px);
+    z-index: -1;
+    animation: pulse 2.5s infinite ease-in-out;
+  }
+
+  /* Hover Effect */
   &:hover {
-    background-color: ${(props) => props.theme.body};
-    color: ${(props) => props.theme.text};
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 20px rgba(255, 138, 0, 0.5);
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.4; filter: blur(12px); }
+    50% { opacity: 0.7; filter: blur(18px); }
+    100% { opacity: 0.4; filter: blur(12px); }
   }
 `;
+
 
 const Intro = () => {
   return (
