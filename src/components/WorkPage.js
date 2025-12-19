@@ -1,97 +1,373 @@
-import React, { useEffect, useRef } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { DarkTheme } from "./Themes";
-import { motion } from "framer-motion";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
+import AnimatedBackground from '../subComponents/AnimatedBackground';
+import FloatingOrbs from '../subComponents/FloatingOrbs';
+import Navbar from '../subComponents/Navbar';
+import { Work } from '../data/WorkData';
 
-import LogoComponent from "../subComponents/LogoComponent";
-import SocialIcons from "../subComponents/SocialIcons";
-import PowerButton from "../subComponents/PowerButton";
+const wobble = keyframes`
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+`;
 
-import { Work } from "../data/WorkData";
-import Card from "../subComponents/Card";
-import { YinYang } from "./AllSvgs";
-import BigTitlte from "../subComponents/BigTitlte";
-
-const Box = styled.div`
-  background-color: ${(props) => props.theme.body};
-
-  height: 400vh;
+const PageContainer = styled.div`
+  width: 100vw;
+  min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  background: #121212;
+`;
+
+const ContentWrapper = styled.section`
+  min-height: 100vh;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 7rem 2rem 3rem;
+  }
+`;
+
+const PageHeader = styled.div`
+  margin-bottom: 4rem;
+`;
+
+const PageTitle = styled(motion.h1)`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #faf8f5;
+  letter-spacing: -0.02em;
+  
+  .accent {
+    color: #ff6b6b;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0.1em;
+      left: 0;
+      width: 100%;
+      height: 0.12em;
+      background: #ffd93d;
+      z-index: -1;
+    }
+  }
+`;
+
+const PageSubtitle = styled(motion.p)`
+  color: #a0a0a0;
+  font-size: 1.15rem;
+  max-width: 600px;
+  line-height: 1.7;
+`;
+
+const ProjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 2.5rem;
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+// Bold project card with colored accent
+const ProjectCard = styled(motion.article)`
+  background: #1e1e1e;
+  border: 2px solid #2a2a2a;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+
+  /* Colored top accent bar */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: ${props => props.accentcolor || '#ff6b6b'};
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &:hover {
+    transform: translateY(-10px) rotate(0.5deg);
+    border-color: ${props => props.accentcolor || '#ff6b6b'};
+    box-shadow: 8px 8px 0px ${props => props.accentcolor || '#ff6b6b'}30;
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+`;
+
+const ProjectImage = styled.div`
+  width: 100%;
+  height: 200px;
+  background: ${props => props.bgColor || '#2a2a2a'};
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+
+  /* Diagonal stripe pattern */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.02) 20px
+    );
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, #1e1e1e, transparent);
+  }
 `;
 
-const Main = styled(motion.ul)`
-  position: fixed;
-  top: 12rem;
-  left: calc(10rem + 15vw);
-  height: 40vh;
-  display: flex;
-
-  color: white;
+const ProjectContent = styled.div`
+  padding: 1.75rem 2rem 2rem;
 `;
-const Rotate = styled.span`
+
+const ProjectNumber = styled.span`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: ${props => props.color || '#ff6b6b'};
+  margin-bottom: 0.5rem;
   display: block;
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  width: 80px;
-  height: 80px;
-  z-index: 1;
+  letter-spacing: 0.1em;
 `;
 
-// Framer-motion Configuration
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
+const ProjectTitle = styled.h3`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #faf8f5;
+  margin-bottom: 0.75rem;
+`;
 
-    transition: {
-      staggerChildren: 0.5,
-      duration: 0.5,
-    },
-  },
+const ProjectDescription = styled.p`
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+`;
+
+const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+`;
+
+// Colorful bold tags
+const tagColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
+
+const Tag = styled.span`
+  padding: 0.4rem 0.9rem;
+  background: ${props => props.color}15;
+  border: 2px solid ${props => props.color}40;
+  border-radius: 6px;
+  color: ${props => props.color};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${props => props.color}25;
+    transform: translateY(-2px);
+  }
+`;
+
+const LinksContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+// Tactile button style
+const ProjectLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  background: ${props => props.primary ? '#ff6b6b' : 'transparent'};
+  border: 2px solid ${props => props.primary ? '#ff6b6b' : '#2a2a2a'};
+  border-radius: 8px;
+  color: ${props => props.primary ? '#121212' : '#faf8f5'};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: ${props => props.primary ? '4px 4px 0px rgba(0, 0, 0, 0.2)' : 'none'};
+
+  &:hover {
+    transform: ${props => props.primary ? 'translate(-2px, -2px)' : 'translateY(-2px)'};
+    box-shadow: ${props => props.primary
+    ? '6px 6px 0px rgba(255, 107, 107, 0.3)'
+    : '0 4px 12px rgba(0, 212, 170, 0.2)'};
+    background: ${props => props.primary ? '#ffd93d' : 'transparent'};
+    border-color: ${props => props.primary ? '#ffd93d' : '#00d4aa'};
+    color: ${props => props.primary ? '#121212' : '#00d4aa'};
+  }
+`;
+
+const EmptyState = styled(motion.div)`
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #1e1e1e;
+  border: 2px dashed #2a2a2a;
+  border-radius: 16px;
+`;
+
+const EmptyIcon = styled.div`
+  font-size: 4rem;
+  margin-bottom: 1rem;
+`;
+
+const EmptyTitle = styled.h3`
+  font-family: 'Space Grotesk', sans-serif;
+  color: #faf8f5;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+`;
+
+const EmptyText = styled.p`
+  color: #6a6a6a;
+  font-size: 1rem;
+`;
+
+const getProjectIcon = (tags) => {
+  const tagLower = tags[0]?.toLowerCase() || '';
+  if (tagLower.includes('c') && !tagLower.includes('css')) return '⚙️';
+  if (tagLower.includes('python')) return '🐍';
+  if (tagLower.includes('javascript') || tagLower.includes('js')) return '🟨';
+  if (tagLower.includes('react')) return '⚛️';
+  if (tagLower.includes('node')) return '🟢';
+  return '🚀';
 };
 
+const accentColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
+
 const WorkPage = () => {
-  const ref = useRef(null);
-  const yinyang = useRef(null);
-
-  useEffect(() => {
-    let element = ref.current;
-
-    const rotate = () => {
-      element.style.transform = `translateX(${-window.pageYOffset}px)`;
-
-      return (yinyang.current.style.transform =
-        "rotate(" + -window.pageYOffset + "deg)");
-    };
-
-    window.addEventListener("scroll", rotate);
-    return () => {
-      window.removeEventListener("scroll", rotate);
-    };
-  }, []);
-
   return (
-    <ThemeProvider theme={DarkTheme}>
-      <Box>
-        <LogoComponent theme="dark" />
-        <SocialIcons theme="dark" />
-        <PowerButton />
+    <PageContainer>
+      <AnimatedBackground />
+      <FloatingOrbs />
+      <Navbar />
 
-        <Main ref={ref} variants={container} initial="hidden" animate="show">
-          {Work.map((d) => (
-            <Card key={d.id} data={d} />
-          ))}
-        </Main>
-        <Rotate ref={yinyang}>
-          <YinYang width={80} height={80} fill={DarkTheme.text} />
-        </Rotate>
+      <ContentWrapper>
+        <PageHeader>
+          <PageTitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Major <span className="accent">Projects</span>
+          </PageTitle>
 
-        <BigTitlte text="WORK" top="10%" right="20%" />
-      </Box>
-    </ThemeProvider>
+          <PageSubtitle
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            Engineering projects showcasing algorithms, full-stack development, and machine learning. Built with a focus on practical problem-solving.
+          </PageSubtitle>
+        </PageHeader>
+
+        {Work && Work.length > 0 ? (
+          <ProjectsGrid>
+            {Work.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                accentcolor={accentColors[index % accentColors.length]}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                whileHover={{ scale: 1.01 }}
+              >
+                <ProjectImage bgColor={`${accentColors[index % accentColors.length]}15`}>
+                  {getProjectIcon(project.tags)}
+                </ProjectImage>
+                <ProjectContent>
+                  <ProjectNumber color={accentColors[index % accentColors.length]}>
+                    {String(index + 1).padStart(2, '0')}
+                  </ProjectNumber>
+                  <ProjectTitle>{project.name}</ProjectTitle>
+                  <ProjectDescription>{project.description}</ProjectDescription>
+                  <TagsContainer>
+                    {project.tags.map((tag, tagIndex) => (
+                      <Tag key={tagIndex} color={tagColors[tagIndex % tagColors.length]}>
+                        {tag}
+                      </Tag>
+                    ))}
+                  </TagsContainer>
+                  <LinksContainer>
+                    {project.demo && (
+                      <ProjectLink
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        primary
+                      >
+                        Live Demo →
+                      </ProjectLink>
+                    )}
+                    {project.github && (
+                      <ProjectLink
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        GitHub
+                      </ProjectLink>
+                    )}
+                  </LinksContainer>
+                </ProjectContent>
+              </ProjectCard>
+            ))}
+          </ProjectsGrid>
+        ) : (
+          <EmptyState
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <EmptyIcon>🚧</EmptyIcon>
+            <EmptyTitle>Projects Coming Soon</EmptyTitle>
+            <EmptyText>I'm working on some exciting projects. Stay tuned!</EmptyText>
+          </EmptyState>
+        )}
+      </ContentWrapper>
+    </PageContainer>
   );
 };
 

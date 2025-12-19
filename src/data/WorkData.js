@@ -1,63 +1,53 @@
-// work data
+// Major Projects Data
+// Engineering-focused projects for internships, placements, and technical reviews
 
 export const Work = [
     {
-        id:1,
-        name:"Complex Sorting visulizer",
-        description:"It is built using HTML, CSS, and JavaScript, featuring dynamic animations and an interactive interface for visualizing sorting algorithms.",
-        tags:["Javascript","canvas","shorting"],
-        
-        demo:"https://codepen.io/Deepakdekisugi/pen/zYbNpJE",
-        github:"https://github.com/Deepakdekisugi/Javascript_projects/tree/main/Complex%20Sort"
+        id: 1,
+        name: "Chess Engine",
+        description: "Built a chess engine using C with core game logic, move validation, and board evaluation. Focused on algorithms, performance, and low-level programming concepts.",
+        tags: ["C", "Algorithms", "Game Logic"],
+        github: "https://github.com/Deepakdekisugi/Chess_engine_using_c",
+        demo: null
     },
-//     {
-//         id:2,
-//         name:"Job listing website",
-//         description:"A Job listing website build in ReactJS. With searching and filtering functionalities.",
-//         tags:["react","sass"],
-        
-//         demo:"http://react-job-listing-website.codebucks27.vercel.app/",
-//         github:"https://github.com/codebucks27/react-job-listing-website"
-        
-//     },
-//     {
-//         id:3,
-//         name:"Dev.to Clone",
-//         description:"A clone of Dev.to build using ReactJS. With realtime fetching of articles from dev.to using API.",
-//         tags:["react","api","sass"],
-        
-//         demo:"http://devto-clone-codebucks27.vercel.app/",
-//         github:"https://github.com/codebucks27/devto-clone"
-//     },
-//     {
-//         id:4,
-//         name:"Sidebar Menu",
-//         description:"A cool looking sidebar menu build using ReactJS and styledComponents.It has really smooth animations.",
-//         tags:["react","styledComponents","react-router"],
-        
-//         demo:"https://react-sidebar.vercel.app/",
-//         github:"https://github.com/codebucks27/react-sidebar"
-       
-//     },{
-//         id:5,
-//         name:"Todo App(React + Redux)",
-//         description:"A todo app build using Redux-toolkit and framer-motion for smooth animations.",
-//         tags:["react","redux","framer-motion"],
-        
-//         demo:"http://react-redux-todo-app-git-main-codebucks27.vercel.app/",
-//         github:"https://github.com/codebucks27/React-Redux-Todo-App"
-        
-//     },
-//     {
-//         id:6,
-//         name:"Responsive Navigation Menu",
-//         description:"A reponsive navbar menu component in ReactJS with react-router functionalities. Built from scratch.",
-//         tags:["react","react-router","css"],
-        
-//         demo:"http://react-responsive-navbar-codebucks27.vercel.app/",
-//         github:"https://github.com/codebucks27/React-responsive-navbar"
-        
-//     },
-    
-  
-] 
+    {
+        id: 2,
+        name: "Digit Prediction",
+        description: "Machine learning project for handwritten digit recognition. Implemented data preprocessing, model training, and prediction pipeline using Python.",
+        tags: ["Python", "Machine Learning", "Neural Networks"],
+        github: "https://github.com/Deepakdekisugi/Digit_prediction",
+        demo: null
+    },
+    {
+        id: 3,
+        name: "Urban Company Clone",
+        description: "Frontend clone of the Urban Company platform. Built responsive layouts, service listings, and interactive UI components with modern JavaScript.",
+        tags: ["JavaScript", "HTML/CSS", "Responsive Design"],
+        github: "https://github.com/Deepakdekisugi/Urban_Company_Clone",
+        demo: null
+    },
+    {
+        id: 4,
+        name: "GIPHY Clone",
+        description: "Web application that fetches and displays GIFs using the GIPHY API. Includes search functionality, asynchronous requests, and dynamic DOM updates.",
+        tags: ["JavaScript", "REST API", "Async/Await"],
+        github: "https://github.com/Deepakdekisugi/GIPHY_clone",
+        demo: null
+    },
+    {
+        id: 5,
+        name: "Twitter Clone",
+        description: "Social media UI clone featuring feed layout, posts, and user interactions. Demonstrates handling of complex UI structure and state management.",
+        tags: ["JavaScript", "UI/UX", "State Management"],
+        github: "https://github.com/Deepakdekisugi/twitter-clone",
+        demo: null
+    },
+    {
+        id: 6,
+        name: "MERN Backend",
+        description: "Backend project built while exploring the MERN stack. Includes REST APIs, server-side logic, and database interactions using Node.js and MongoDB.",
+        tags: ["JavaScript", "Node.js", "MongoDB", "Express"],
+        github: "https://github.com/Deepakdekisugi/Explorin_MERN_Backend",
+        demo: null
+    }
+];
