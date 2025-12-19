@@ -267,12 +267,12 @@ const EmptyText = styled.p`
 
 const getProjectIcon = (tags) => {
   const tagLower = tags[0]?.toLowerCase() || '';
-  if (tagLower.includes('c') && !tagLower.includes('css')) return '⚙️';
-  if (tagLower.includes('python')) return '🐍';
-  if (tagLower.includes('javascript') || tagLower.includes('js')) return '🟨';
-  if (tagLower.includes('react')) return '⚛️';
-  if (tagLower.includes('node')) return '🟢';
-  return '🚀';
+  if (tagLower.includes('c') && !tagLower.includes('css')) return 'C';
+  if (tagLower.includes('python')) return 'Py';
+  if (tagLower.includes('javascript') || tagLower.includes('js')) return 'JS';
+  if (tagLower.includes('react')) return 'Re';
+  if (tagLower.includes('node')) return 'No';
+  return '</>';
 };
 
 const accentColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
@@ -361,7 +361,7 @@ const WorkPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <EmptyIcon>🚧</EmptyIcon>
+            <EmptyIcon>{ }</EmptyIcon>
             <EmptyTitle>Projects Coming Soon</EmptyTitle>
             <EmptyText>I'm working on some exciting projects. Stay tuned!</EmptyText>
           </EmptyState>

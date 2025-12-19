@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- AI/ML Brain Illustration -->
+  
+  <!-- Neural Network Background -->
+  <g opacity="0.3">
+    <!-- Layer 1 nodes -->
+    <circle cx="60" cy="80" r="8" fill="#e040fb"/>
+    <circle cx="60" cy="150" r="8" fill="#e040fb"/>
+    <circle cx="60" cy="220" r="8" fill="#e040fb"/>
+    
+    <!-- Layer 2 nodes -->
+    <circle cx="140" cy="100" r="8" fill="#00d4aa"/>
+    <circle cx="140" cy="150" r="8" fill="#00d4aa"/>
+    <circle cx="140" cy="200" r="8" fill="#00d4aa"/>
+    
+    <!-- Connections Layer 1 to 2 -->
+    <line x1="60" y1="80" x2="140" y2="100" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="80" x2="140" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="150" x2="140" y2="100" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="150" x2="140" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="150" x2="140" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="220" x2="140" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="60" y1="220" x2="140" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+  </g>
+  
+  <!-- Main Brain Shape -->
+  <g transform="translate(200, 150)">
+    <!-- Brain left hemisphere -->
+    <path d="M-20 -60 
+             Q-70 -50 -80 0 
+             Q-85 40 -60 65 
+             Q-30 90 0 70
+             Q-20 30 -20 0
+             Q-20 -30 -20 -60" 
+          fill="#e040fb" opacity="0.8"/>
+    
+    <!-- Brain right hemisphere -->
+    <path d="M20 -60 
+             Q70 -50 80 0 
+             Q85 40 60 65 
+             Q30 90 0 70
+             Q20 30 20 0
+             Q20 -30 20 -60" 
+          fill="#e040fb" opacity="0.9"/>
+    
+    <!-- Brain folds -->
+    <path d="M-50 -20 Q-30 -30 -20 -10" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    <path d="M-60 15 Q-40 5 -25 20" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    <path d="M-45 45 Q-30 35 -15 50" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    
+    <path d="M50 -20 Q30 -30 20 -10" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    <path d="M60 15 Q40 5 25 20" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    <path d="M45 45 Q30 35 15 50" stroke="#1e1e1e" stroke-width="3" fill="none"/>
+    
+    <!-- Center connection -->
+    <line x1="0" y1="-50" x2="0" y2="60" stroke="#1e1e1e" stroke-width="2"/>
+  </g>
+  
+  <!-- Neural Network Right Side -->
+  <g opacity="0.3">
+    <!-- Layer 3 nodes -->
+    <circle cx="260" cy="100" r="8" fill="#00d4aa"/>
+    <circle cx="260" cy="150" r="8" fill="#00d4aa"/>
+    <circle cx="260" cy="200" r="8" fill="#00d4aa"/>
+    
+    <!-- Layer 4 nodes -->
+    <circle cx="340" cy="80" r="8" fill="#ffd93d"/>
+    <circle cx="340" cy="150" r="8" fill="#ffd93d"/>
+    <circle cx="340" cy="220" r="8" fill="#ffd93d"/>
+    
+    <!-- Connections Layer 3 to 4 -->
+    <line x1="260" y1="100" x2="340" y2="80" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="100" x2="340" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="150" x2="340" y2="80" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="150" x2="340" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="150" x2="340" y2="220" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="200" x2="340" y2="150" stroke="#2a2a2a" stroke-width="1"/>
+    <line x1="260" y1="200" x2="340" y2="220" stroke="#2a2a2a" stroke-width="1"/>
+  </g>
+  
+  <!-- Data flow indicators -->
+  <circle cx="40" cy="150" r="5" fill="#ff6b6b"/>
+  <circle cx="360" cy="150" r="5" fill="#c6ff00"/>
+  
+  <!-- Labels -->
+  <text x="40" y="270" font-family="Space Grotesk, sans-serif" font-size="11" fill="#a0a0a0" text-anchor="middle">Input</text>
+  <text x="200" y="270" font-family="Space Grotesk, sans-serif" font-size="11" fill="#e040fb" text-anchor="middle">Processing</text>
+  <text x="360" y="270" font-family="Space Grotesk, sans-serif" font-size="11" fill="#a0a0a0" text-anchor="middle">Output</text>
+</svg>

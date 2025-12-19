@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
 import Navbar from '../subComponents/Navbar';
+import AiBrainSvg from '../assets/Images/ai-brain.svg';
+import WorkspaceSvg from '../assets/Images/workspace.svg';
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -251,42 +253,36 @@ const TechName = styled.span`
 
 const skillCategories = [
   {
-    icon: '⚛️',
     title: 'Frontend Development',
     color: '#00d4aa',
     description: 'Building responsive, performant, and beautiful user interfaces with modern frameworks.',
     skills: ['React', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Redux', 'Next.js', 'Tailwind CSS', 'Styled Components', 'Framer Motion', 'Responsive Design']
   },
   {
-    icon: '🖥️',
     title: 'Backend & MERN Stack',
     color: '#ff6b6b',
     description: 'Full-stack development with Node.js, Express, MongoDB, and REST API design.',
     skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT Auth', 'Mongoose', 'MySQL', 'Socket.io', 'API Design', 'Authentication', 'CRUD Operations']
   },
   {
-    icon: '🤖',
     title: 'AI & Machine Learning',
     color: '#e040fb',
     description: 'Exploring ML fundamentals, neural networks, computer vision, and AI applications.',
     skills: ['Python', 'NumPy', 'Pandas', 'TensorFlow', 'Keras', 'Scikit-learn', 'Neural Networks', 'Data Processing', 'OpenCV', 'Matplotlib', 'Jupyter']
   },
   {
-    icon: '⚙️',
     title: 'Tools & DevOps',
     color: '#ffd93d',
     description: 'Efficient development practices, version control, and deployment tools.',
     skills: ['Git', 'GitHub', 'VS Code', 'npm', 'Postman', 'Firebase', 'Linux', 'Docker', 'Vercel', 'Netlify', 'Terminal']
   },
   {
-    icon: '🗂️',
     title: 'Programming Languages',
     color: '#c6ff00',
     description: 'Core programming languages for different domains and problem-solving.',
     skills: ['JavaScript', 'Python', 'C', 'C++', 'Java', 'SQL', 'Bash']
   },
   {
-    icon: '📐',
     title: 'CS Fundamentals',
     color: '#00d4aa',
     description: 'Strong foundation in computer science concepts and problem-solving.',
@@ -295,22 +291,22 @@ const skillCategories = [
 ];
 
 const techStack = [
-  { name: 'React', icon: '⚛️', color: 'rgba(97, 218, 251, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'JavaScript', icon: 'JS', color: 'rgba(247, 223, 30, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'TypeScript', icon: 'TS', color: 'rgba(49, 120, 198, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'Node.js', icon: '🟢', color: 'rgba(68, 136, 62, 0.25)', hoverColor: '#c6ff00' },
-  { name: 'Express', icon: 'Ex', color: 'rgba(100, 100, 100, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'MongoDB', icon: '🍃', color: 'rgba(77, 179, 61, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'Python', icon: '🐍', color: 'rgba(55, 118, 171, 0.25)', hoverColor: '#e040fb' },
-  { name: 'TensorFlow', icon: 'TF', color: 'rgba(255, 152, 0, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'C', icon: 'C', color: 'rgba(85, 85, 255, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'HTML5', icon: '🌐', color: 'rgba(227, 79, 38, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'CSS3', icon: '🎨', color: 'rgba(38, 77, 228, 0.25)', hoverColor: '#e040fb' },
-  { name: 'Tailwind', icon: '💨', color: 'rgba(56, 189, 248, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'Git', icon: '📦', color: 'rgba(240, 80, 51, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'Firebase', icon: '🔥', color: 'rgba(255, 196, 0, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'Postman', icon: '📮', color: 'rgba(255, 108, 55, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'VS Code', icon: '💻', color: 'rgba(0, 122, 204, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'React', abbr: 'Re', color: 'rgba(97, 218, 251, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'JavaScript', abbr: 'JS', color: 'rgba(247, 223, 30, 0.25)', hoverColor: '#ffd93d' },
+  { name: 'TypeScript', abbr: 'TS', color: 'rgba(49, 120, 198, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'Node.js', abbr: 'No', color: 'rgba(68, 136, 62, 0.25)', hoverColor: '#c6ff00' },
+  { name: 'Express', abbr: 'Ex', color: 'rgba(100, 100, 100, 0.25)', hoverColor: '#ffd93d' },
+  { name: 'MongoDB', abbr: 'Mo', color: 'rgba(77, 179, 61, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'Python', abbr: 'Py', color: 'rgba(55, 118, 171, 0.25)', hoverColor: '#e040fb' },
+  { name: 'TensorFlow', abbr: 'TF', color: 'rgba(255, 152, 0, 0.25)', hoverColor: '#ff6b6b' },
+  { name: 'C', abbr: 'C', color: 'rgba(85, 85, 255, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'HTML5', abbr: 'HT', color: 'rgba(227, 79, 38, 0.25)', hoverColor: '#ff6b6b' },
+  { name: 'CSS3', abbr: 'CS', color: 'rgba(38, 77, 228, 0.25)', hoverColor: '#e040fb' },
+  { name: 'Tailwind', abbr: 'Tw', color: 'rgba(56, 189, 248, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'Git', abbr: 'Gt', color: 'rgba(240, 80, 51, 0.25)', hoverColor: '#ff6b6b' },
+  { name: 'Firebase', abbr: 'Fb', color: 'rgba(255, 196, 0, 0.25)', hoverColor: '#ffd93d' },
+  { name: 'Postman', abbr: 'Pm', color: 'rgba(255, 108, 55, 0.25)', hoverColor: '#ff6b6b' },
+  { name: 'VS Code', abbr: 'VS', color: 'rgba(0, 122, 204, 0.25)', hoverColor: '#00d4aa' },
 ];
 
 const MySkillsPage = () => {
@@ -350,9 +346,6 @@ const MySkillsPage = () => {
               whileHover={{ scale: 1.01 }}
             >
               <CategoryHeader>
-                <CategoryIcon color={category.color}>
-                  {category.icon}
-                </CategoryIcon>
                 <CategoryTitle>{category.title}</CategoryTitle>
               </CategoryHeader>
               <CategoryDescription>{category.description}</CategoryDescription>
@@ -372,6 +365,45 @@ const MySkillsPage = () => {
           ))}
         </SkillsSection>
 
+        {/* Illustrations Section */}
+        <motion.div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '2rem',
+            marginBottom: '3rem',
+            maxWidth: '800px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div style={{
+            background: '#1e1e1e',
+            borderRadius: '16px',
+            padding: '2rem',
+            border: '2px solid #2a2a2a',
+            textAlign: 'center'
+          }}>
+            <img src={WorkspaceSvg} alt="Developer workspace" style={{ width: '100%', maxWidth: '250px', marginBottom: '1rem' }} />
+            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>Full-Stack Development</h4>
+            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Building complete web applications</p>
+          </div>
+          <div style={{
+            background: '#1e1e1e',
+            borderRadius: '16px',
+            padding: '2rem',
+            border: '2px solid #2a2a2a',
+            textAlign: 'center'
+          }}>
+            <img src={AiBrainSvg} alt="AI and Machine Learning" style={{ width: '100%', maxWidth: '250px', marginBottom: '1rem' }} />
+            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>AI & Machine Learning</h4>
+            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Exploring neural networks and ML</p>
+          </div>
+        </motion.div>
+
         <TechStackSection
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -388,7 +420,7 @@ const MySkillsPage = () => {
                 transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <TechIcon color={tech.color}>{tech.icon}</TechIcon>
+                <TechIcon color={tech.color}>{tech.abbr}</TechIcon>
                 <TechName>{tech.name}</TechName>
               </TechItem>
             ))}

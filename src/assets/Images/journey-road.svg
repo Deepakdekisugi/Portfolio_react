@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Journey Road Illustration -->
+  
+  <!-- Background gradient road -->
+  <path d="M50 280 Q100 200 150 180 Q200 160 250 170 Q300 180 350 100" 
+        stroke="#2a2a2a" stroke-width="40" fill="none" stroke-linecap="round"/>
+  
+  <!-- Road dashed line -->
+  <path d="M50 280 Q100 200 150 180 Q200 160 250 170 Q300 180 350 100" 
+        stroke="#ffd93d" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="15,10"/>
+  
+  <!-- Milestone markers -->
+  <!-- Start -->
+  <circle cx="55" cy="275" r="12" fill="#ff6b6b"/>
+  <circle cx="55" cy="275" r="6" fill="#1e1e1e"/>
+  
+  <!-- Mid 1 -->
+  <circle cx="145" cy="182" r="12" fill="#ffd93d"/>
+  <circle cx="145" cy="182" r="6" fill="#1e1e1e"/>
+  
+  <!-- Mid 2 -->
+  <circle cx="250" cy="168" r="12" fill="#00d4aa"/>
+  <circle cx="250" cy="168" r="6" fill="#1e1e1e"/>
+  
+  <!-- End / Current -->
+  <circle cx="345" cy="105" r="15" fill="#e040fb"/>
+  <circle cx="345" cy="105" r="8" fill="#1e1e1e"/>
+  <circle cx="345" cy="105" r="4" fill="#e040fb"/>
+  
+  <!-- Goal flag -->
+  <line x1="345" y1="105" x2="345" y2="50" stroke="#faf8f5" stroke-width="2"/>
+  <path d="M345 50 L380 60 L345 70 Z" fill="#ff6b6b"/>
+  
+  <!-- Labels -->
+  <text x="55" y="255" font-family="Space Grotesk, sans-serif" font-size="10" fill="#ff6b6b" text-anchor="middle">Start</text>
+  <text x="145" y="210" font-family="Space Grotesk, sans-serif" font-size="10" fill="#ffd93d" text-anchor="middle">Learn</text>
+  <text x="250" y="145" font-family="Space Grotesk, sans-serif" font-size="10" fill="#00d4aa" text-anchor="middle">Build</text>
+  <text x="345" y="135" font-family="Space Grotesk, sans-serif" font-size="10" fill="#e040fb" text-anchor="middle">Grow</text>
+  
+  <!-- Decorative elements -->
+  <rect x="80" y="240" width="25" height="20" rx="3" fill="#1e1e1e"/>
+  <text x="92" y="255" font-family="monospace" font-size="8" fill="#00d4aa" text-anchor="middle">C</text>
+  
+  <rect x="180" y="195" width="30" height="20" rx="3" fill="#1e1e1e"/>
+  <text x="195" y="210" font-family="monospace" font-size="8" fill="#ffd93d" text-anchor="middle">JS</text>
+  
+  <rect x="290" y="130" width="35" height="20" rx="3" fill="#1e1e1e"/>
+  <text x="307" y="145" font-family="monospace" font-size="8" fill="#00d4aa" text-anchor="middle">MERN</text>
+</svg>

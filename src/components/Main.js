@@ -6,6 +6,8 @@ import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
 import Navbar from '../subComponents/Navbar';
 import Me from '../assets/Images/profile-img.png';
+import JourneyRoadSvg from '../assets/Images/journey-road.svg';
+import MernStackSvg from '../assets/Images/mern-stack.svg';
 
 const wobble = keyframes`
   0%, 100% { transform: rotate(-2deg); }
@@ -311,6 +313,20 @@ const SectionSubtitle = styled(motion.p)`
   margin: 0 auto;
 `;
 
+const IllustrationContainer = styled(motion.div)`
+  max-width: 400px;
+  margin: 2rem auto 0;
+  
+  img {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
+`;
+
 // Road container
 const RoadContainer = styled.div`
   position: relative;
@@ -482,51 +498,44 @@ const MilestoneIcon = styled.span`
 const journeyMilestones = [
   {
     year: "2022",
-    icon: "🎓",
     title: "Started Engineering",
     description: "Began my engineering journey with a passion for technology and problem-solving.",
     color: "#ff6b6b"
   },
   {
     year: "2022",
-    icon: "💻",
     title: "Learning C & DSA",
     description: "Built a Chess Engine in C, mastered data structures and algorithms. Foundation for everything that followed.",
     color: "#ffd93d"
   },
   {
     year: "2023",
-    icon: "🌐",
     title: "Frontend Development",
     description: "Dived into JavaScript, built Urban Company, GIPHY & Twitter clones. Learned responsive design and modern CSS.",
     color: "#00d4aa"
   },
   {
     year: "2023",
-    icon: "⚛️",
     title: "React & Modern Frameworks",
     description: "Mastered React.js, state management, and component architecture. Built production-ready applications.",
     color: "#61dafb"
   },
   {
     year: "2024",
-    icon: "🚀",
     title: "Full-Stack MERN",
     description: "Currently building full-stack applications with MongoDB, Express, React, Node.js. REST APIs and database design.",
     color: "#00d4aa"
   },
   {
     year: "2024",
-    icon: "🤖",
     title: "AI/ML Journey",
     description: "Exploring machine learning, built digit recognition system. Learning neural networks, Python, and AI fundamentals.",
     color: "#e040fb"
   },
   {
     year: "Future",
-    icon: "🎯",
     title: "What's Next",
-    description: "Deep diving into AI/ML, contributing to open source, and preparing for industry roles. The journey continues...",
+    description: "Deep diving into AI/ML, contributing to open source, and preparing for industry roles. The journey continues.",
     color: "#c6ff00"
   }
 ];
@@ -647,12 +656,12 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55 }}
           >
-            <TechPill color="#00d4aa">⚛️ React</TechPill>
-            <TechPill color="#ffd93d">🟨 JavaScript</TechPill>
-            <TechPill color="#00d4aa">🟢 Node.js</TechPill>
-            <TechPill color="#68a063">🍃 MongoDB</TechPill>
-            <TechPill color="#e040fb">🐍 Python</TechPill>
-            <TechPill color="#e040fb">🤖 ML</TechPill>
+            <TechPill color="#00d4aa">React</TechPill>
+            <TechPill color="#ffd93d">JavaScript</TechPill>
+            <TechPill color="#00d4aa">Node.js</TechPill>
+            <TechPill color="#68a063">MongoDB</TechPill>
+            <TechPill color="#e040fb">Python</TechPill>
+            <TechPill color="#e040fb">ML</TechPill>
           </TechPills>
 
           <HeroDescription
@@ -698,7 +707,7 @@ const Main = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            My <span className="accent">Journey</span> 🛤️
+            My <span className="accent">Journey</span>
           </SectionTitle>
           <SectionSubtitle
             initial={{ opacity: 0, y: 20 }}
@@ -708,6 +717,15 @@ const Main = () => {
           >
             From writing first lines of code to building full-stack applications
           </SectionSubtitle>
+
+          <IllustrationContainer
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <img src={JourneyRoadSvg} alt="Journey roadmap" />
+          </IllustrationContainer>
         </SectionHeader>
 
         <RoadContainer>
@@ -726,7 +744,6 @@ const Main = () => {
                   color={milestone.color}
                   side={index % 2 === 0 ? 'right' : 'left'}
                 >
-                  <MilestoneIcon>{milestone.icon}</MilestoneIcon>
                   <MilestoneYear color={milestone.color}>{milestone.year}</MilestoneYear>
                   <MilestoneTitle>{milestone.title}</MilestoneTitle>
                   <MilestoneDescription>{milestone.description}</MilestoneDescription>
