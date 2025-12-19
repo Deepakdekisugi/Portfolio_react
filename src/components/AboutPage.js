@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
 import Navbar from '../subComponents/Navbar';
-import astronaut from '../assets/Images/spaceman.png';
+import developerAstronaut from '../assets/Images/developer-astronaut.svg';
 
 const wobble = keyframes`
   0%, 100% { transform: translateY(0px) rotate(-2deg); }
@@ -163,7 +163,7 @@ const ImageSection = styled(motion.div)`
 
 const AstronautWrapper = styled.div`
   position: relative;
-  width: clamp(250px, 30vw, 380px);
+  width: clamp(350px, 45vw, 550px);
   animation: ${wobble} 5s ease-in-out infinite;
 
   /* Coral background blob */
@@ -313,7 +313,7 @@ const AboutPage = () => {
           transition={{ duration: 0.7, delay: 0.3, ease: [0.68, -0.55, 0.265, 1.55] }}
         >
           <AstronautWrapper>
-            <AstronautImage src={astronaut} alt="Astronaut" />
+            <AstronautImage src={developerAstronaut} alt="Developer Astronaut" />
           </AstronautWrapper>
         </ImageSection>
       </ContentWrapper>
