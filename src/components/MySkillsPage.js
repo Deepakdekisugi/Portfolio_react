@@ -3,9 +3,15 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
+
 import Navbar from '../subComponents/Navbar';
+import HackerCard from '../subComponents/HackerCard';
+import GlitchText from '../subComponents/GlitchText';
 import AiBrainSvg from '../assets/Images/ai-brain.svg';
 import WorkspaceSvg from '../assets/Images/workspace.svg';
+
+// Glitch animation keyframes
+
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -76,41 +82,10 @@ const SkillsSection = styled.div`
   }
 `;
 
-const accentColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d'];
 
-const SkillCategory = styled(motion.div)`
-  background: #1e1e1e;
-  border: 2px solid #2a2a2a;
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  position: relative;
 
-  /* Colored top accent bar */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${props => props.accentcolor || '#ff6b6b'};
-    border-radius: 16px 16px 0 0;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  &:hover {
-    border-color: ${props => props.accentcolor || '#ff6b6b'};
-    transform: translateY(-8px) rotate(0.5deg);
-    box-shadow: 8px 8px 0px ${props => props.accentcolor || '#ff6b6b'}25;
-
-    &::before {
-      transform: scaleX(1);
-    }
-  }
-`;
+// Replaced by HackerCard styling
+// const SkillCategory = styled(motion.div)...
 
 const CategoryHeader = styled.div`
   display: flex;
@@ -119,23 +94,37 @@ const CategoryHeader = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const CategoryIcon = styled.div`
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  background: ${props => props.color || '#ff6b6b'}20;
-  border: 2px solid ${props => props.color || '#ff6b6b'}40;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-`;
+
 
 const CategoryTitle = styled.h3`
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   color: #faf8f5;
+  position: relative;
+  display: inline-block;
+  
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &::before {
+    color: #ff6b6b;
+    text-shadow: -2px 0 #00d4aa;
+  }
+  
+  &::after {
+    color: #00d4aa;
+    text-shadow: 2px 0 #ff6b6b, -1px 0 #e040fb;
+  }
 `;
 
 const CategoryDescription = styled.p`
@@ -323,7 +312,7 @@ const MySkillsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            My <span className="accent">Skills</span>
+            <GlitchText>My <span className="accent">Skills</span></GlitchText>
           </PageTitle>
 
           <PageSubtitle
@@ -337,31 +326,33 @@ const MySkillsPage = () => {
 
         <SkillsSection>
           {skillCategories.map((category, index) => (
-            <SkillCategory
+            <HackerCard
               key={index}
-              accentcolor={category.color}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              whileHover={{ scale: 1.01 }}
+              icon={null}
             >
-              <CategoryHeader>
-                <CategoryTitle>{category.title}</CategoryTitle>
-              </CategoryHeader>
-              <CategoryDescription>{category.description}</CategoryDescription>
-              <SkillTags>
-                {category.skills.map((skill, skillIndex) => (
-                  <SkillTag
-                    key={skillIndex}
-                    color={tagColors[skillIndex % tagColors.length]}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {skill}
-                  </SkillTag>
-                ))}
-              </SkillTags>
-            </SkillCategory>
+              <div style={{ padding: '2rem' }}>
+                <CategoryHeader>
+                  {/* Icon removed from here as it's now in the center bg */}
+                  <CategoryTitle data-text={category.title}>{category.title}</CategoryTitle>
+                </CategoryHeader>
+                <CategoryDescription>{category.description}</CategoryDescription>
+                <SkillTags>
+                  {category.skills.map((skill, skillIndex) => (
+                    <SkillTag
+                      key={skillIndex}
+                      color={tagColors[skillIndex % tagColors.length]}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {skill}
+                    </SkillTag>
+                  ))}
+                </SkillTags>
+              </div>
+            </HackerCard>
           ))}
         </SkillsSection>
 
@@ -409,7 +400,7 @@ const MySkillsPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <TechStackTitle>Tech Stack</TechStackTitle>
+          <TechStackTitle><GlitchText>Tech Stack</GlitchText></TechStackTitle>
           <TechGrid>
             {techStack.map((tech, index) => (
               <TechItem

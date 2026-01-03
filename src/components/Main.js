@@ -7,7 +7,9 @@ import FloatingOrbs from '../subComponents/FloatingOrbs';
 import Navbar from '../subComponents/Navbar';
 import Me from '../assets/Images/profile-img.png';
 import JourneyRoadSvg from '../assets/Images/journey-road.svg';
-import MernStackSvg from '../assets/Images/mern-stack.svg';
+
+import EchoImage from '../subComponents/EchoImage';
+import GlitchText from '../subComponents/GlitchText';
 
 const wobble = keyframes`
   0%, 100% { transform: rotate(-2deg); }
@@ -240,15 +242,8 @@ const ImageWrapper = styled(motion.div)`
   }
 `;
 
-const ProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 4px solid #2a2a2a;
-  position: relative;
-  z-index: 1;
-`;
+// ProfileImage removed - replaced by EchoImage defined externally or inline usage
+// const ProfileImage = styled.img...
 
 // Tech Stack Pills
 const TechPills = styled(motion.div)`
@@ -488,11 +483,7 @@ const MilestoneDescription = styled.p`
   line-height: 1.6;
 `;
 
-const MilestoneIcon = styled.span`
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  display: block;
-`;
+
 
 // Journey data
 const journeyMilestones = [
@@ -640,7 +631,7 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <span className="accent">Deepak</span>
+            <GlitchText><span className="accent">Deepak</span></GlitchText>
           </HeroTitle>
 
           <RoleText
@@ -693,7 +684,7 @@ const Main = () => {
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.68, -0.55, 0.265, 1.55] }}
           >
-            <ProfileImage src={Me} alt="Deepak" />
+            <EchoImage src={Me} alt="Deepak" />
           </ImageWrapper>
         </HeroImageSection>
       </HeroSection>
@@ -707,7 +698,7 @@ const Main = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            My <span className="accent">Journey</span>
+            <GlitchText>My <span className="accent">Journey</span></GlitchText>
           </SectionTitle>
           <SectionSubtitle
             initial={{ opacity: 0, y: 20 }}
@@ -763,7 +754,7 @@ const Main = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Explore <span className="accent">More</span>
+            <GlitchText>Explore <span className="accent">More</span></GlitchText>
           </SectionTitle>
         </SectionHeader>
 

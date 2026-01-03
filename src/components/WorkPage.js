@@ -1,15 +1,15 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
+
 import Navbar from '../subComponents/Navbar';
+import HackerCard from '../subComponents/HackerCard';
+import GlitchText from '../subComponents/GlitchText';
 import { Work } from '../data/WorkData';
 
-const wobble = keyframes`
-  0%, 100% { transform: rotate(-1deg); }
-  50% { transform: rotate(1deg); }
-`;
+
 
 const PageContainer = styled.div`
   width: 100vw;
@@ -79,75 +79,10 @@ const ProjectsGrid = styled.div`
   }
 `;
 
-// Bold project card with colored accent
-const ProjectCard = styled(motion.article)`
-  background: #1e1e1e;
-  border: 2px solid #2a2a2a;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  position: relative;
+// Replaced by HackerCard, but keeping ProjectContent styling
+// const ProjectCard = styled(motion.article)...
 
-  /* Colored top accent bar */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${props => props.accentcolor || '#ff6b6b'};
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  &:hover {
-    transform: translateY(-10px) rotate(0.5deg);
-    border-color: ${props => props.accentcolor || '#ff6b6b'};
-    box-shadow: 8px 8px 0px ${props => props.accentcolor || '#ff6b6b'}30;
-
-    &::before {
-      transform: scaleX(1);
-    }
-  }
-`;
-
-const ProjectImage = styled.div`
-  width: 100%;
-  height: 200px;
-  background: ${props => props.bgColor || '#2a2a2a'};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  position: relative;
-  overflow: hidden;
-
-  /* Diagonal stripe pattern */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 10px,
-      rgba(255, 255, 255, 0.02) 10px,
-      rgba(255, 255, 255, 0.02) 20px
-    );
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60%;
-    background: linear-gradient(to top, #1e1e1e, transparent);
-  }
-`;
+// ProjectImage removed/unused as we use center icon in HackerCard
 
 const ProjectContent = styled.div`
   padding: 1.75rem 2rem 2rem;
@@ -169,6 +104,30 @@ const ProjectTitle = styled.h3`
   font-weight: 700;
   color: #faf8f5;
   margin-bottom: 0.75rem;
+  position: relative;
+  display: inline-block;
+  
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  &::before {
+    color: #ff6b6b;
+    text-shadow: -2px 0 #00d4aa;
+  }
+  
+  &::after {
+    color: #00d4aa;
+    text-shadow: 2px 0 #ff6b6b, -1px 0 #e040fb;
+  }
 `;
 
 const ProjectDescription = styled.p`
@@ -291,7 +250,7 @@ const WorkPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Major <span className="accent">Projects</span>
+            <GlitchText>Major <span className="accent">Projects</span></GlitchText>
           </PageTitle>
 
           <PageSubtitle
@@ -306,22 +265,18 @@ const WorkPage = () => {
         {Work && Work.length > 0 ? (
           <ProjectsGrid>
             {Work.map((project, index) => (
-              <ProjectCard
+              <HackerCard
                 key={project.id}
-                accentcolor={accentColors[index % accentColors.length]}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                whileHover={{ scale: 1.01 }}
+                icon={<span style={{ fontSize: '2rem', fontWeight: 700, color: accentColors[index % accentColors.length] }}>{getProjectIcon(project.tags)}</span>}
               >
-                <ProjectImage bgColor={`${accentColors[index % accentColors.length]}15`}>
-                  {getProjectIcon(project.tags)}
-                </ProjectImage>
                 <ProjectContent>
                   <ProjectNumber color={accentColors[index % accentColors.length]}>
                     {String(index + 1).padStart(2, '0')}
                   </ProjectNumber>
-                  <ProjectTitle>{project.name}</ProjectTitle>
+                  <ProjectTitle data-text={project.name}>{project.name}</ProjectTitle>
                   <ProjectDescription>{project.description}</ProjectDescription>
                   <TagsContainer>
                     {project.tags.map((tag, tagIndex) => (
@@ -352,7 +307,7 @@ const WorkPage = () => {
                     )}
                   </LinksContainer>
                 </ProjectContent>
-              </ProjectCard>
+              </HackerCard>
             ))}
           </ProjectsGrid>
         ) : (

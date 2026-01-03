@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
 import Navbar from '../subComponents/Navbar';
+import GlitchText from '../subComponents/GlitchText';
 import developerAstronaut from '../assets/Images/developer-astronaut.svg';
 
 const wobble = keyframes`
@@ -247,9 +248,9 @@ const AboutPage = () => {
           <PageTitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            About <span className="accent">Me</span>
+            <GlitchText>About <span className="accent">Me</span></GlitchText>
           </PageTitle>
 
           <Bio

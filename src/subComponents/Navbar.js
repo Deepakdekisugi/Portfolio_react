@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import GlitchText from './GlitchText';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -244,11 +245,11 @@ const Navbar = () => {
         <Logo to="/">DEEPAK</Logo>
 
         <NavLinks>
-          <StyledNavLink to="/" end>Home</StyledNavLink>
-          <StyledNavLink to="/about">About</StyledNavLink>
-          <StyledNavLink to="/skills">Skills</StyledNavLink>
-          <StyledNavLink to="/work">Projects</StyledNavLink>
-          <ContactButton href="mailto:dk376907@gmail.com">Let's Talk</ContactButton>
+          <StyledNavLink to="/" end><GlitchText>Home</GlitchText></StyledNavLink>
+          <StyledNavLink to="/about"><GlitchText>About</GlitchText></StyledNavLink>
+          <StyledNavLink to="/skills"><GlitchText>Skills</GlitchText></StyledNavLink>
+          <StyledNavLink to="/work"><GlitchText>Projects</GlitchText></StyledNavLink>
+          <ContactButton href="mailto:dk376907@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
         </NavLinks>
 
         <HamburgerButton onClick={toggleMenu} isOpen={isOpen}>
@@ -266,11 +267,11 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.3, ease: [0.68, -0.55, 0.265, 1.55] }}
           >
-            <MobileNavLink to="/" onClick={closeMenu} data-number="01">Home</MobileNavLink>
-            <MobileNavLink to="/about" onClick={closeMenu} data-number="02">About</MobileNavLink>
-            <MobileNavLink to="/skills" onClick={closeMenu} data-number="03">Skills</MobileNavLink>
-            <MobileNavLink to="/work" onClick={closeMenu} data-number="04">Projects</MobileNavLink>
-            <ContactButton href="mailto:dk376907@gmail.com">Let's Talk</ContactButton>
+            <MobileNavLink to="/" onClick={closeMenu} data-number="01"><GlitchText>Home</GlitchText></MobileNavLink>
+            <MobileNavLink to="/about" onClick={closeMenu} data-number="02"><GlitchText>About</GlitchText></MobileNavLink>
+            <MobileNavLink to="/skills" onClick={closeMenu} data-number="03"><GlitchText>Skills</GlitchText></MobileNavLink>
+            <MobileNavLink to="/work" onClick={closeMenu} data-number="04"><GlitchText>Projects</GlitchText></MobileNavLink>
+            <ContactButton href="mailto:dk376907@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
           </MobileMenu>
         )}
       </AnimatePresence>
