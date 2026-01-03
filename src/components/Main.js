@@ -10,6 +10,7 @@ import JourneyRoadSvg from '../assets/Images/journey-road.svg';
 
 import EchoImage from '../subComponents/EchoImage';
 import GlitchText from '../subComponents/GlitchText';
+import AnnotationCallout from '../subComponents/AnnotationCallout';
 
 const wobble = keyframes`
   0%, 100% { transform: rotate(-2deg); }
@@ -51,6 +52,7 @@ const HeroContent = styled.div`
   flex: 1;
   max-width: 650px;
   z-index: 10;
+  position: relative;
 `;
 
 const Greeting = styled(motion.p)`
@@ -618,6 +620,34 @@ const Main = () => {
 
       <HeroSection>
         <HeroContent>
+          {/* Dynamic Callout 1 - Cycles through design & structure duties */}
+          <AnnotationCallout
+            initialDelay={1.5}
+            sequence={[
+              {
+                role: "Lisa",
+                text: "Bold typography for hierarchy.",
+                top: "0%",
+                left: "0%",
+                color: "#ff6b6b"
+              },
+              {
+                role: "Alex",
+                text: "Great use of whitespace here.",
+                top: "50%",
+                right: "0%",
+                color: "#ff6b6b"
+              },
+              {
+                role: "Marcus",
+                text: "H1 tag looks perfect.",
+                top: "10%", // Increased from 5% to safe zone
+                left: "20%",
+                color: "#ff6b6b"
+              }
+            ]}
+          />
+
           <Greeting
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -642,18 +672,47 @@ const Main = () => {
             <span className="highlight">Full-Stack MERN Developer</span> & <span className="highlight-pink">AI/ML Enthusiast</span>
           </RoleText>
 
-          <TechPills
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-          >
-            <TechPill color="#00d4aa">React</TechPill>
-            <TechPill color="#ffd93d">JavaScript</TechPill>
-            <TechPill color="#00d4aa">Node.js</TechPill>
-            <TechPill color="#68a063">MongoDB</TechPill>
-            <TechPill color="#e040fb">Python</TechPill>
-            <TechPill color="#e040fb">ML</TechPill>
-          </TechPills>
+          {/* Dynamic Callout 2 - Cycles through dev & performance duties */}
+          <div style={{ position: 'relative' }}>
+            <AnnotationCallout
+              initialDelay={2.5}
+              sequence={[
+                {
+                  role: "Chen",
+                  text: "Clean component architecture.",
+                  top: "0%",
+                  right: "5%",
+                  color: "#00d4aa"
+                },
+                {
+                  role: "Sarah",
+                  text: "Modern stack selection.",
+                  top: "100%",
+                  left: "5%",
+                  color: "#00d4aa"
+                },
+                {
+                  role: "James",
+                  text: "Good color contrast ratios.",
+                  top: "0%",
+                  left: "40%",
+                  color: "#00d4aa"
+                }
+              ]}
+            />
+            <TechPills
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+            >
+              <TechPill color="#00d4aa">React</TechPill>
+              <TechPill color="#ffd93d">JavaScript</TechPill>
+              <TechPill color="#00d4aa">Node.js</TechPill>
+              <TechPill color="#68a063">MongoDB</TechPill>
+              <TechPill color="#e040fb">Python</TechPill>
+              <TechPill color="#e040fb">ML</TechPill>
+            </TechPills>
+          </div>
 
           <HeroDescription
             initial={{ opacity: 0, y: 20 }}
@@ -678,7 +737,34 @@ const Main = () => {
           </ButtonGroup>
         </HeroContent>
 
-        <HeroImageSection>
+        <HeroImageSection style={{ position: 'relative' }}>
+          {/* Dynamic Callout 3 - Cycles through UX & Product duties */}
+          <AnnotationCallout
+            initialDelay={3.5}
+            sequence={[
+              {
+                role: "Priya",
+                text: "Clear personal branding.",
+                bottom: "10%",
+                right: "5%",
+                color: "#e040fb"
+              },
+              {
+                role: "Tom",
+                text: "Ready for launch!",
+                bottom: "80%",
+                left: "5%",
+                color: "#e040fb"
+              },
+              {
+                role: "Sofia",
+                text: "Smooth entrance effects.",
+                bottom: "35%",
+                left: "5%",
+                color: "#e040fb"
+              }
+            ]}
+          />
           <ImageWrapper
             initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
