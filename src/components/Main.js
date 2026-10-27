@@ -273,6 +273,34 @@ const TechPill = styled.span`
   gap: 0.4rem;
 `;
 
+const MissionReadout = styled(motion.div)`
+  background: rgba(18, 18, 18, 0.72);
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 1.5rem;
+  max-width: 520px;
+  padding: 0.9rem 1rem;
+
+  span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .label { color: #6a6a6a; }
+  .value { color: #00d4aa; font-weight: 700; }
+
+  @media (max-width: 968px) {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+`;
+
 // ============ JOURNEY ROADMAP SECTION ============
 
 const JourneySection = styled.section`
@@ -672,6 +700,20 @@ const Main = () => {
             <span className="highlight">Software Engineer</span> | <span className="highlight-pink">Java Backend Developer</span>
           </RoleText>
 
+          <MissionReadout
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.52 }}
+            aria-label="Current professional mission"
+          >
+            <span className="label">Mission</span>
+            <span className="value">Reliable backend systems</span>
+            <span className="label">Coordinates</span>
+            <span className="value">Bangalore, India // UTC+5:30</span>
+            <span className="label">Mode</span>
+            <span className="value">Build · Learn · Ship</span>
+          </MissionReadout>
+
           {/* Dynamic Callout 2 - Cycles through dev & performance duties */}
           <div style={{ position: 'relative' }}>
             <AnnotationCallout
@@ -729,10 +771,10 @@ const Main = () => {
             transition={{ duration: 0.5, delay: 0.7 }}
           >
             <PrimaryButton to="/work">
-              View Projects →
+              Enter Mission Archive →
             </PrimaryButton>
             <SecondaryButton href="mailto:kumardeepakcse22@gmail.com">
-              Get In Touch
+              Open Communication
             </SecondaryButton>
           </ButtonGroup>
         </HeroContent>

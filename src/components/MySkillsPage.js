@@ -71,6 +71,33 @@ const PageSubtitle = styled(motion.p)`
   line-height: 1.7;
 `;
 
+const LabStatus = styled(motion.div)`
+  align-items: center;
+  background: #1e1e1e;
+  border: 2px solid #2a2a2a;
+  border-radius: 12px;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  padding: 1rem 1.25rem;
+
+  @media (max-width: 600px) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+`;
+
+const LabStatusText = styled.span`
+  color: ${props => props.color || '#a0a0a0'};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+`;
+
 const SkillsSection = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -319,6 +346,15 @@ const MySkillsPage = () => {
             Backend engineering, distributed systems, cloud tooling, frontend development, and AI integration
           </PageSubtitle>
         </PageHeader>
+
+        <LabStatus
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <LabStatusText>Systems lab // capability matrix loaded</LabStatusText>
+          <LabStatusText color="#00d4aa">12 core technologies online</LabStatusText>
+        </LabStatus>
 
         <SkillsSection>
           {skillCategories.map((category, index) => (

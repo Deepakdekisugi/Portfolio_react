@@ -24,6 +24,32 @@ const Nav = styled.nav`
   }
 `;
 
+const NetworkStatus = styled.div`
+  align-items: center;
+  color: #00d4aa;
+  display: inline-flex;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  gap: 0.45rem;
+  letter-spacing: 0.1em;
+  margin-left: 1.5rem;
+  text-transform: uppercase;
+
+  &::before {
+    background: #00d4aa;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 212, 170, 0.7);
+    content: '';
+    height: 7px;
+    width: 7px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
 const Logo = styled(NavLink)`
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.6rem;
@@ -242,14 +268,17 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        <Logo to="/">DEEPAK KUMAR</Logo>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Logo to="/">DEEPAK KUMAR</Logo>
+          <NetworkStatus>Systems online</NetworkStatus>
+        </div>
 
         <NavLinks>
-          <StyledNavLink to="/" end><GlitchText>Home</GlitchText></StyledNavLink>
-          <StyledNavLink to="/about"><GlitchText>About</GlitchText></StyledNavLink>
-          <StyledNavLink to="/skills"><GlitchText>Skills</GlitchText></StyledNavLink>
-          <StyledNavLink to="/work"><GlitchText>Projects</GlitchText></StyledNavLink>
-          <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
+          <StyledNavLink to="/" end><GlitchText>01 / Home</GlitchText></StyledNavLink>
+          <StyledNavLink to="/about"><GlitchText>02 / About</GlitchText></StyledNavLink>
+          <StyledNavLink to="/skills"><GlitchText>03 / Skills</GlitchText></StyledNavLink>
+          <StyledNavLink to="/work"><GlitchText>04 / Projects</GlitchText></StyledNavLink>
+          <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Open Channel</GlitchText></ContactButton>
         </NavLinks>
 
         <HamburgerButton onClick={toggleMenu} isOpen={isOpen}>
@@ -271,7 +300,7 @@ const Navbar = () => {
             <MobileNavLink to="/about" onClick={closeMenu} data-number="02"><GlitchText>About</GlitchText></MobileNavLink>
             <MobileNavLink to="/skills" onClick={closeMenu} data-number="03"><GlitchText>Skills</GlitchText></MobileNavLink>
             <MobileNavLink to="/work" onClick={closeMenu} data-number="04"><GlitchText>Projects</GlitchText></MobileNavLink>
-            <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
+            <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Open Channel</GlitchText></ContactButton>
           </MobileMenu>
         )}
       </AnimatePresence>

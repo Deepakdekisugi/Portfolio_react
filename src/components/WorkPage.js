@@ -1,259 +1,398 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../subComponents/AnimatedBackground';
 import FloatingOrbs from '../subComponents/FloatingOrbs';
-
 import Navbar from '../subComponents/Navbar';
-import HackerCard from '../subComponents/HackerCard';
 import GlitchText from '../subComponents/GlitchText';
 import { Work } from '../data/WorkData';
 
-
+const colors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
+const categories = ['All', ...new Set(Work.map(project => project.category))];
 
 const PageContainer = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
   background: #121212;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  width: 100vw;
 `;
 
-const ContentWrapper = styled.section`
-  min-height: 100vh;
-  padding: 8rem 4rem 4rem;
+const ContentWrapper = styled.main`
+  margin: 0 auto;
+  max-width: 1320px;
+  padding: 8rem 4rem 5rem;
   position: relative;
   z-index: 10;
-  max-width: 1400px;
-  margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 7rem 2rem 3rem;
+    padding: 7rem 1.25rem 3rem;
   }
 `;
 
-const PageHeader = styled.div`
-  margin-bottom: 4rem;
+const Header = styled.header`
+  margin-bottom: 3rem;
 `;
 
 const PageTitle = styled(motion.h1)`
+  color: #faf8f5;
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #faf8f5;
-  letter-spacing: -0.02em;
-  
+  letter-spacing: -0.04em;
+  margin: 0 0 1rem;
+
   .accent {
     color: #ff6b6b;
     position: relative;
-    display: inline-block;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0.1em;
-      left: 0;
-      width: 100%;
-      height: 0.12em;
-      background: #ffd93d;
-      z-index: -1;
-    }
+  }
+
+  .accent::after {
+    background: #ffd93d;
+    bottom: 0;
+    content: '';
+    height: 0.12em;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
   }
 `;
 
-const PageSubtitle = styled(motion.p)`
+const Subtitle = styled(motion.p)`
   color: #a0a0a0;
-  font-size: 1.15rem;
-  max-width: 600px;
+  font-size: 1.1rem;
   line-height: 1.7;
+  margin: 0;
+  max-width: 650px;
 `;
 
-const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 2.5rem;
+const FilterBar = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+`;
 
-  @media (max-width: 400px) {
+const FilterButton = styled.button`
+  background: ${props => props.active ? props.color : 'transparent'};
+  border: 1px solid ${props => props.active ? props.color : '#2a2a2a'};
+  border-radius: 999px;
+  color: ${props => props.active ? '#121212' : '#a0a0a0'};
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: ${props => props.color};
+    color: ${props => props.active ? '#121212' : props.color};
+  }
+`;
+
+const Spotlight = styled(motion.article)`
+  background: linear-gradient(135deg, #24201f 0%, #171717 55%, #102522 100%);
+  border: 2px solid ${props => props.color};
+  border-radius: 20px;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 0.8fr 1.5fr;
+  margin-bottom: 3rem;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  position: relative;
+
+  &::after {
+    background: ${props => props.color};
+    border-radius: 50%;
+    content: '';
+    filter: blur(2px);
+    height: 240px;
+    opacity: 0.12;
+    position: absolute;
+    right: -80px;
+    top: -90px;
+    width: 240px;
+  }
+
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
   }
 `;
 
-// Replaced by HackerCard, but keeping ProjectContent styling
-// const ProjectCard = styled(motion.article)...
-
-// ProjectImage removed/unused as we use center icon in HackerCard
-
-const ProjectContent = styled.div`
-  padding: 1.75rem 2rem 2rem;
-`;
-
-const ProjectNumber = styled.span`
+const SpotlightLabel = styled.span`
+  color: ${props => props.color};
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: ${props => props.color || '#ff6b6b'};
-  margin-bottom: 0.5rem;
-  display: block;
-  letter-spacing: 0.1em;
-`;
-
-const ProjectTitle = styled.h3`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.4rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #faf8f5;
-  margin-bottom: 0.75rem;
-  position: relative;
-  display: inline-block;
-  
-  &::before,
-  &::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  &::before {
-    color: #ff6b6b;
-    text-shadow: -2px 0 #00d4aa;
-  }
-  
-  &::after {
-    color: #00d4aa;
-    text-shadow: 2px 0 #ff6b6b, -1px 0 #e040fb;
-  }
-`;
-
-const ProjectDescription = styled.p`
-  color: #a0a0a0;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-`;
-
-const ProjectMeta = styled.p`
-  color: #00d4aa;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.8rem;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 `;
 
-const ProjectDetails = styled.p`
-  color: #888;
-  font-size: 0.88rem;
-  line-height: 1.65;
-  margin-bottom: 1.25rem;
+const SpotlightIndex = styled.div`
+  color: ${props => props.color};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 700;
+  line-height: 0.85;
+  opacity: 0.85;
 `;
 
-const TagsContainer = styled.div`
+const SpotlightTitle = styled.h2`
+  color: #faf8f5;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 0.75rem 0 1rem;
+  max-width: 620px;
+`;
+
+const SpotlightText = styled.p`
+  color: #b6b6b6;
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0 0 1.5rem;
+  max-width: 650px;
+`;
+
+const SpotlightHint = styled.p`
+  color: #6a6a6a;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  margin: 1.5rem 0 0;
+  text-transform: uppercase;
+`;
+
+const TagList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 `;
 
-// Colorful bold tags
-const tagColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
-
 const Tag = styled.span`
-  padding: 0.4rem 0.9rem;
-  background: ${props => props.color}15;
-  border: 2px solid ${props => props.color}40;
-  border-radius: 6px;
+  border: 1px solid ${props => props.color}60;
+  border-radius: 5px;
   color: ${props => props.color};
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.3s ease;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.65rem;
+`;
+
+const LinkRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+`;
+
+const ProjectLink = styled.a`
+  background: ${props => props.primary ? props.color : 'transparent'};
+  border: 1px solid ${props => props.primary ? props.color : '#3a3a3a'};
+  border-radius: 7px;
+  color: ${props => props.primary ? '#121212' : '#faf8f5'};
+  display: inline-flex;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
 
   &:hover {
-    background: ${props => props.color}25;
+    background: ${props => props.primary ? '#ffd93d' : 'transparent'};
+    border-color: ${props => props.primary ? '#ffd93d' : props.color};
+    color: ${props => props.primary ? '#121212' : props.color};
     transform: translateY(-2px);
   }
 `;
 
-const LinksContainer = styled.div`
-  display: flex;
-  gap: 1rem;
+const Status = styled.span`
+  align-items: center;
+  border: 1px solid ${props => props.color}50;
+  border-radius: 7px;
+  color: ${props => props.color};
+  display: inline-flex;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
 `;
 
-// Tactile button style
-const ProjectLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.3rem;
-  background: ${props => props.primary ? '#ff6b6b' : 'transparent'};
-  border: 2px solid ${props => props.primary ? '#ff6b6b' : '#2a2a2a'};
-  border-radius: 8px;
-  color: ${props => props.primary ? '#121212' : '#faf8f5'};
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  box-shadow: ${props => props.primary ? '4px 4px 0px rgba(0, 0, 0, 0.2)' : 'none'};
+const ProjectGrid = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
 
-  &:hover {
-    transform: ${props => props.primary ? 'translate(-2px, -2px)' : 'translateY(-2px)'};
-    box-shadow: ${props => props.primary
-    ? '6px 6px 0px rgba(255, 107, 107, 0.3)'
-    : '0 4px 12px rgba(0, 212, 170, 0.2)'};
-    background: ${props => props.primary ? '#ffd93d' : 'transparent'};
-    border-color: ${props => props.primary ? '#ffd93d' : '#00d4aa'};
-    color: ${props => props.primary ? '#121212' : '#00d4aa'};
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const EmptyState = styled(motion.div)`
-  text-align: center;
-  padding: 4rem 2rem;
-  background: #1e1e1e;
-  border: 2px dashed #2a2a2a;
-  border-radius: 16px;
+const ProjectTile = styled(motion.article)`
+  background: #1b1b1b;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: ${props => props.color};
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px ${props => props.color}18;
+  }
 `;
 
-const EmptyIcon = styled.div`
-  font-size: 4rem;
-  margin-bottom: 1rem;
+const TileTop = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
 `;
 
-const EmptyTitle = styled.h3`
+const TileIndex = styled.span`
+  color: ${props => props.color};
   font-family: 'Space Grotesk', sans-serif;
-  color: #faf8f5;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 `;
 
-const EmptyText = styled.p`
+const Signal = styled.div`
+  align-items: center;
   color: #6a6a6a;
-  font-size: 1rem;
+  display: flex;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  gap: 0.35rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &::before {
+    background: ${props => props.color};
+    border-radius: 50%;
+    content: '';
+    height: 6px;
+    width: 6px;
+  }
 `;
 
-const getProjectIcon = (tags) => {
-  const tagLower = tags[0]?.toLowerCase() || '';
-  if (tagLower.includes('c') && !tagLower.includes('css')) return 'C';
-  if (tagLower.includes('python')) return 'Py';
-  if (tagLower.includes('javascript') || tagLower.includes('js')) return 'JS';
-  if (tagLower.includes('react')) return 'Re';
-  if (tagLower.includes('node')) return 'No';
-  return '</>';
+const TileTitle = styled.h3`
+  color: #faf8f5;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+`;
+
+const TileMeta = styled.p`
+  color: ${props => props.color};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+`;
+
+const TileDescription = styled.p`
+  color: #929292;
+  display: -webkit-box;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+`;
+
+const TileFooter = styled.div`
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1.25rem;
+`;
+
+const TileAction = styled.a`
+  color: ${props => props.color};
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover {
+    color: #faf8f5;
+  }
+`;
+
+const getStatus = (project) => {
+  if (project.category === 'Backend Engineering') return 'Production system';
+  if (project.category === 'AI Applications') return 'AI application';
+  if (project.category === 'Frontend Development') return 'Portfolio build';
+  return 'Engineering project';
 };
 
-const accentColors = ['#ff6b6b', '#00d4aa', '#e040fb', '#ffd93d', '#c6ff00'];
+const ProjectLinks = ({ project, color }) => (
+  <LinkRow>
+    {project.demo && (
+      <ProjectLink href={project.demo} target="_blank" rel="noopener noreferrer" primary color={color} onClick={event => event.stopPropagation()}>
+        Open demo →
+      </ProjectLink>
+    )}
+    {project.github && (
+      <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer" color={color} onClick={event => event.stopPropagation()}>
+        Source code
+      </ProjectLink>
+    )}
+    {!project.demo && !project.github && <Status color={color}>{getStatus(project)}</Status>}
+  </LinkRow>
+);
 
 const WorkPage = () => {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeProjectId, setActiveProjectId] = useState(Work[0]?.id);
+  const filteredProjects = useMemo(
+    () => activeCategory === 'All'
+      ? Work
+      : Work.filter(project => project.category === activeCategory),
+    [activeCategory]
+  );
+  const spotlight = filteredProjects.find(project => project.id === activeProjectId) || filteredProjects[0];
+  const remainingProjects = filteredProjects.filter(project => project.id !== spotlight?.id);
+  const spotlightColor = colors[Work.indexOf(spotlight) % colors.length];
+
+  useEffect(() => {
+    if (filteredProjects.length > 0 && !filteredProjects.some(project => project.id === activeProjectId)) {
+      setActiveProjectId(filteredProjects[0].id);
+    }
+  }, [activeCategory, activeProjectId, filteredProjects]);
+
+  useEffect(() => {
+    if (filteredProjects.length < 2) return undefined;
+
+    const cycle = window.setInterval(() => {
+      setActiveProjectId(currentId => {
+        const availableProjects = filteredProjects.filter(project => project.id !== currentId);
+        const nextProject = availableProjects[Math.floor(Math.random() * availableProjects.length)];
+        return nextProject ? nextProject.id : currentId;
+      });
+    }, 7000);
+
+    return () => window.clearInterval(cycle);
+  }, [filteredProjects]);
+
   return (
     <PageContainer>
       <AnimatedBackground />
@@ -261,91 +400,125 @@ const WorkPage = () => {
       <Navbar />
 
       <ContentWrapper>
-        <PageHeader>
+        <Header>
           <PageTitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
           >
-            <GlitchText>Major <span className="accent">Projects</span></GlitchText>
+            <GlitchText>Project <span className="accent">Observatory</span></GlitchText>
           </PageTitle>
-
-          <PageSubtitle
+          <Subtitle
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Backend systems, AI-powered applications, and frontend products built with a focus on reliable engineering and practical problem-solving.
-          </PageSubtitle>
-        </PageHeader>
+            Explore the systems, experiments, and products I have built across backend engineering, AI, and frontend development.
+          </Subtitle>
+        </Header>
 
-        {Work && Work.length > 0 ? (
-          <ProjectsGrid>
-            {Work.map((project, index) => (
-              <HackerCard
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                icon={<span style={{ fontSize: '2rem', fontWeight: 700, color: accentColors[index % accentColors.length] }}>{getProjectIcon(project.tags)}</span>}
-              >
-                <ProjectContent>
-                  <ProjectNumber color={accentColors[index % accentColors.length]}>
-                    {String(index + 1).padStart(2, '0')}
-                  </ProjectNumber>
-                  <ProjectTitle data-text={project.name}>{project.name}</ProjectTitle>
-                  <ProjectMeta>
-                    {project.category}{project.period ? ` · ${project.period}` : ''}
-                  </ProjectMeta>
-                  <ProjectDescription>{project.description}</ProjectDescription>
-                  {project.details && <ProjectDetails>{project.details}</ProjectDetails>}
-                  <TagsContainer>
-                    {project.tags.map((tag, tagIndex) => (
-                      <Tag key={tagIndex} color={tagColors[tagIndex % tagColors.length]}>
-                        {tag}
-                      </Tag>
-                    ))}
-                  </TagsContainer>
-                  <LinksContainer>
-                    {project.demo && (
-                      <ProjectLink
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        primary
-                      >
-                        Live Demo →
-                      </ProjectLink>
-                    )}
-                    {project.github && (
-                      <ProjectLink
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        GitHub
-                      </ProjectLink>
-                    )}
-                    {!project.github && !project.demo && (
-                      <ProjectLink as="span" aria-label="Project link pending">
-                        Demo link pending
-                      </ProjectLink>
-                    )}
-                  </LinksContainer>
-                </ProjectContent>
-              </HackerCard>
-            ))}
-          </ProjectsGrid>
+        <FilterBar aria-label="Filter projects by category">
+          {categories.map((category, index) => (
+            <FilterButton
+              key={category}
+              type="button"
+              active={activeCategory === category}
+              color={colors[index % colors.length]}
+              onClick={() => setActiveCategory(category)}
+            >
+              {category} {category === 'All' && `(${Work.length})`}
+            </FilterButton>
+          ))}
+        </FilterBar>
+
+        {spotlight ? (
+          <>
+            <Spotlight
+              color={spotlightColor}
+              key={spotlight.id}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div>
+                <SpotlightLabel color={spotlightColor}>Featured signal // {spotlight.category}</SpotlightLabel>
+                <SpotlightIndex color={spotlightColor}>
+                  {String(Work.indexOf(spotlight) + 1).padStart(2, '0')}
+                </SpotlightIndex>
+                <SpotlightLabel color="#ffd93d">
+                  {spotlight.period || 'Selected engineering work'}
+                </SpotlightLabel>
+              </div>
+              <div>
+                <SpotlightTitle>{spotlight.name}</SpotlightTitle>
+                <SpotlightText>
+                  {spotlight.description} {spotlight.details || ''}
+                </SpotlightText>
+                <TagList>
+                  {spotlight.tags.map((tag, index) => (
+                    <Tag key={tag} color={colors[index % colors.length]}>{tag}</Tag>
+                  ))}
+                </TagList>
+                <ProjectLinks project={spotlight} color={spotlightColor} />
+                <SpotlightHint>Auto-rotates every 7 seconds · select any signal to promote it</SpotlightHint>
+              </div>
+            </Spotlight>
+
+            {remainingProjects.length > 0 && (
+              <ProjectGrid>
+                {remainingProjects.map((project, index) => {
+                  const color = colors[Work.indexOf(project) % colors.length];
+                  return (
+                    <ProjectTile
+                      key={project.id}
+                      color={color}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: index * 0.05 }}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Promote ${project.name} to featured project`}
+                      onClick={() => setActiveProjectId(project.id)}
+                      onKeyDown={event => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          setActiveProjectId(project.id);
+                        }
+                      }}
+                    >
+                      <TileTop>
+                        <TileIndex color={color}>
+                          {String(Work.indexOf(project) + 1).padStart(2, '0')} / SIGNAL
+                        </TileIndex>
+                        <Signal color={color}>{project.category}</Signal>
+                      </TileTop>
+                      <TileTitle>{project.name}</TileTitle>
+                      <TileMeta color={color}>{project.period || 'Engineering project'}</TileMeta>
+                      <TileDescription>{project.description}</TileDescription>
+                      <TileFooter>
+                        <Signal color={color}>Online</Signal>
+                        {project.github || project.demo ? (
+                          <TileAction
+                            href={project.github || project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color={color}
+                            onClick={event => event.stopPropagation()}
+                          >
+                            Inspect →
+                          </TileAction>
+                        ) : (
+                          <TileAction as="span" color={color}>{getStatus(project)}</TileAction>
+                        )}
+                      </TileFooter>
+                    </ProjectTile>
+                  );
+                })}
+              </ProjectGrid>
+            )}
+          </>
         ) : (
-          <EmptyState
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <EmptyIcon>{ }</EmptyIcon>
-            <EmptyTitle>Projects Coming Soon</EmptyTitle>
-            <EmptyText>I'm working on some exciting projects. Stay tuned!</EmptyText>
-          </EmptyState>
+          <Status color="#ff6b6b">No projects in this channel</Status>
         )}
       </ContentWrapper>
     </PageContainer>
