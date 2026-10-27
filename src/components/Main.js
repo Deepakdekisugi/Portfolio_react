@@ -490,45 +490,45 @@ const MilestoneDescription = styled.p`
 // Journey data
 const journeyMilestones = [
   {
-    year: "2022",
-    title: "Started Engineering",
-    description: "Began my engineering journey with a passion for technology and problem-solving.",
+    year: "Foundation",
+    title: "C, DSA & Engineering Fundamentals",
+    description: "Built a chess engine in C and developed a foundation in data structures, algorithms, OOP, DBMS, and problem-solving.",
     color: "#ff6b6b"
   },
   {
-    year: "2022",
-    title: "Learning C & DSA",
-    description: "Built a Chess Engine in C, mastered data structures and algorithms. Foundation for everything that followed.",
+    year: "Dec 2023",
+    title: "Nirvana Studios Internship",
+    description: "Worked as a Frontend Web Developer Intern, building responsive React interfaces and a static company website.",
     color: "#ffd93d"
   },
   {
-    year: "2023",
-    title: "Frontend Development",
-    description: "Dived into JavaScript, built Urban Company, GIPHY & Twitter clones. Learned responsive design and modern CSS.",
+    year: "Jun 2024",
+    title: "Software Engineer",
+    description: "Joined TapQwik Software Private Limited and moved into Java backend development with Spring Boot and REST APIs.",
     color: "#00d4aa"
   },
   {
-    year: "2023",
-    title: "React & Modern Frameworks",
-    description: "Mastered React.js, state management, and component architecture. Built production-ready applications.",
+    year: "Backend Systems",
+    title: "Microservices & Distributed Services",
+    description: "Built services with Kafka, Redis, MySQL, MongoDB, Docker, AWS, Jenkins, validation, testing, and production troubleshooting.",
     color: "#61dafb"
   },
   {
-    year: "2024",
-    title: "Full-Stack MERN",
-    description: "Currently building full-stack applications with MongoDB, Express, React, Node.js. REST APIs and database design.",
+    year: "2026",
+    title: "AI-Powered Applications",
+    description: "Built AskMyPdf and Skillmate AI with Java, Spring Boot, Gemini AI, LangChain4j, PostgreSQL, and secure backend services.",
     color: "#00d4aa"
   },
   {
-    year: "2024",
-    title: "AI/ML Journey",
-    description: "Exploring machine learning, built digit recognition system. Learning neural networks, Python, and AI fundamentals.",
+    year: "Today",
+    title: "Engineering Reliable Backend Systems",
+    description: "Continuing to build secure, observable, and maintainable backend systems while applying frontend and AI integration strengths.",
     color: "#e040fb"
   },
   {
-    year: "Future",
+    year: "Next",
     title: "What's Next",
-    description: "Deep diving into AI/ML, contributing to open source, and preparing for industry roles. The journey continues.",
+    description: "Growing deeper into distributed systems, cloud-native delivery, database performance, and AI-powered products.",
     color: "#c6ff00"
   }
 ];
@@ -661,7 +661,7 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <GlitchText><span className="accent">Deepak</span></GlitchText>
+            <GlitchText><span className="accent">Deepak Kumar</span></GlitchText>
           </HeroTitle>
 
           <RoleText
@@ -669,7 +669,7 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <span className="highlight">Full-Stack MERN Developer</span> & <span className="highlight-pink">AI/ML Enthusiast</span>
+            <span className="highlight">Software Engineer</span> | <span className="highlight-pink">Java Backend Developer</span>
           </RoleText>
 
           {/* Dynamic Callout 2 - Cycles through dev & performance duties */}
@@ -705,12 +705,12 @@ const Main = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.55 }}
             >
-              <TechPill color="#00d4aa">React</TechPill>
-              <TechPill color="#ffd93d">JavaScript</TechPill>
-              <TechPill color="#00d4aa">Node.js</TechPill>
-              <TechPill color="#68a063">MongoDB</TechPill>
-              <TechPill color="#e040fb">Python</TechPill>
-              <TechPill color="#e040fb">ML</TechPill>
+              <TechPill color="#ff6b6b">Java</TechPill>
+              <TechPill color="#00d4aa">Spring Boot</TechPill>
+              <TechPill color="#ffd93d">Microservices</TechPill>
+              <TechPill color="#68a063">Kafka</TechPill>
+              <TechPill color="#e040fb">Redis</TechPill>
+              <TechPill color="#e040fb">AI Integration</TechPill>
             </TechPills>
           </div>
 
@@ -719,8 +719,8 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            Engineering student building full-stack web applications and exploring the world of AI/ML.
-            Turning ideas into real products with clean code.
+            Building reliable backend systems with Java, Spring Boot, microservices, REST APIs,
+            event-driven services, optimized data access, and secure cloud-ready applications.
           </HeroDescription>
 
           <ButtonGroup
@@ -731,7 +731,7 @@ const Main = () => {
             <PrimaryButton to="/work">
               View Projects →
             </PrimaryButton>
-            <SecondaryButton href="mailto:dk376907@gmail.com">
+            <SecondaryButton href="mailto:kumardeepakcse22@gmail.com">
               Get In Touch
             </SecondaryButton>
           </ButtonGroup>
@@ -871,7 +871,7 @@ const Main = () => {
             <LinkNumber color="#e040fb">02</LinkNumber>
             <LinkTitle>Skills & Stack</LinkTitle>
             <LinkDescription>
-              MERN stack, Python, AI/ML tools, and everything I work with.
+              Java backend systems, Spring Boot, distributed services, databases, cloud tooling, and AI-powered applications.
             </LinkDescription>
           </LinkCard>
 

@@ -244,58 +244,54 @@ const skillCategories = [
   {
     title: 'Frontend Development',
     color: '#00d4aa',
-    description: 'Building responsive, performant, and beautiful user interfaces with modern frameworks.',
+    description: 'Building responsive interfaces that complement reliable backend systems.',
     skills: ['React', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'Redux', 'Next.js', 'Tailwind CSS', 'Styled Components', 'Framer Motion', 'Responsive Design']
   },
   {
-    title: 'Backend & MERN Stack',
+    title: 'Java Backend & Microservices',
     color: '#ff6b6b',
-    description: 'Full-stack development with Node.js, Express, MongoDB, and REST API design.',
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'JWT Auth', 'Mongoose', 'MySQL', 'Socket.io', 'API Design', 'Authentication', 'CRUD Operations']
+    description: 'Designing secure, maintainable services with Java, Spring Boot, and distributed-system patterns.',
+    skills: ['Java', 'Core Java', 'Java 8+', 'Spring Boot', 'Spring MVC', 'Spring Data JPA', 'Hibernate', 'REST APIs', 'Microservices', 'DTO Mapping', 'Validation', 'Exception Handling', 'Spring Security', 'JWT', 'RBAC']
   },
   {
-    title: 'AI & Machine Learning',
+    title: 'Databases, Messaging & Caching',
     color: '#e040fb',
-    description: 'Exploring ML fundamentals, neural networks, computer vision, and AI applications.',
-    skills: ['Python', 'NumPy', 'Pandas', 'TensorFlow', 'Keras', 'Scikit-learn', 'Neural Networks', 'Data Processing', 'OpenCV', 'Matplotlib', 'Jupyter']
+    description: 'Building data access layers and asynchronous services for scalable applications.',
+    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'SQL', 'JPA', 'Database Indexing', 'Query Optimization', 'Apache Kafka', 'Producers', 'Consumers', 'Event-Driven Architecture', 'Idempotent Consumers']
   },
   {
-    title: 'Tools & DevOps',
+    title: 'AI Integration',
     color: '#ffd93d',
-    description: 'Efficient development practices, version control, and deployment tools.',
-    skills: ['Git', 'GitHub', 'VS Code', 'npm', 'Postman', 'Firebase', 'Linux', 'Docker', 'Vercel', 'Netlify', 'Terminal']
+    description: 'Applying AI capabilities to document processing and career-focused products.',
+    skills: ['Gemini AI', 'LangChain4j', 'PDF Parsing', 'Document Chunking', 'Semantic Retrieval', 'Context-Aware Q&A', 'AI Resume Generation', 'Interview Preparation']
   },
   {
-    title: 'Programming Languages',
+    title: 'Cloud, DevOps & Quality',
     color: '#c6ff00',
-    description: 'Core programming languages for different domains and problem-solving.',
-    skills: ['JavaScript', 'Python', 'C', 'C++', 'Java', 'SQL', 'Bash']
+    description: 'Supporting delivery, testing, observability, and production troubleshooting.',
+    skills: ['AWS', 'EC2', 'Docker', 'Jenkins', 'CI/CD', 'Maven', 'Git', 'Linux', 'Shell Scripting', 'JUnit 5', 'Mockito', 'SonarQube', 'Swagger/OpenAPI', 'Postman', 'Logback']
   },
   {
     title: 'CS Fundamentals',
     color: '#00d4aa',
-    description: 'Strong foundation in computer science concepts and problem-solving.',
-    skills: ['Data Structures', 'Algorithms', 'OOP', 'DBMS', 'OS Concepts', 'System Design', 'Problem Solving']
+    description: 'Fundamentals used to design, implement, and troubleshoot software systems.',
+    skills: ['JavaScript', 'Python', 'C', 'C++', 'Bash', 'Data Structures', 'Algorithms', 'OOP', 'DBMS', 'OS Concepts', 'System Design', 'Problem Solving']
   }
 ];
 
 const techStack = [
+  { name: 'Java', abbr: 'Ja', color: 'rgba(255, 107, 107, 0.25)', hoverColor: '#ff6b6b' },
+  { name: 'Spring Boot', abbr: 'SB', color: 'rgba(0, 212, 170, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'Kafka', abbr: 'Ka', color: 'rgba(247, 223, 30, 0.25)', hoverColor: '#ffd93d' },
+  { name: 'Redis', abbr: 'Re', color: 'rgba(224, 64, 251, 0.25)', hoverColor: '#e040fb' },
+  { name: 'MySQL', abbr: 'My', color: 'rgba(77, 179, 61, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'MongoDB', abbr: 'Mo', color: 'rgba(77, 179, 61, 0.25)', hoverColor: '#c6ff00' },
+  { name: 'Docker', abbr: 'Do', color: 'rgba(56, 189, 248, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'AWS', abbr: 'AW', color: 'rgba(255, 152, 0, 0.25)', hoverColor: '#ffd93d' },
+  { name: 'JUnit', abbr: 'Ju', color: 'rgba(255, 107, 107, 0.25)', hoverColor: '#ff6b6b' },
   { name: 'React', abbr: 'Re', color: 'rgba(97, 218, 251, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'JavaScript', abbr: 'JS', color: 'rgba(247, 223, 30, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'TypeScript', abbr: 'TS', color: 'rgba(49, 120, 198, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'Node.js', abbr: 'No', color: 'rgba(68, 136, 62, 0.25)', hoverColor: '#c6ff00' },
-  { name: 'Express', abbr: 'Ex', color: 'rgba(100, 100, 100, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'MongoDB', abbr: 'Mo', color: 'rgba(77, 179, 61, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'Python', abbr: 'Py', color: 'rgba(55, 118, 171, 0.25)', hoverColor: '#e040fb' },
-  { name: 'TensorFlow', abbr: 'TF', color: 'rgba(255, 152, 0, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'C', abbr: 'C', color: 'rgba(85, 85, 255, 0.25)', hoverColor: '#00d4aa' },
-  { name: 'HTML5', abbr: 'HT', color: 'rgba(227, 79, 38, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'CSS3', abbr: 'CS', color: 'rgba(38, 77, 228, 0.25)', hoverColor: '#e040fb' },
-  { name: 'Tailwind', abbr: 'Tw', color: 'rgba(56, 189, 248, 0.25)', hoverColor: '#00d4aa' },
+  { name: 'Gemini AI', abbr: 'AI', color: 'rgba(224, 64, 251, 0.25)', hoverColor: '#e040fb' },
   { name: 'Git', abbr: 'Gt', color: 'rgba(240, 80, 51, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'Firebase', abbr: 'Fb', color: 'rgba(255, 196, 0, 0.25)', hoverColor: '#ffd93d' },
-  { name: 'Postman', abbr: 'Pm', color: 'rgba(255, 108, 55, 0.25)', hoverColor: '#ff6b6b' },
-  { name: 'VS Code', abbr: 'VS', color: 'rgba(0, 122, 204, 0.25)', hoverColor: '#00d4aa' },
 ];
 
 const MySkillsPage = () => {
@@ -320,7 +316,7 @@ const MySkillsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            A collection of technologies and tools I use to bring ideas to life
+            Backend engineering, distributed systems, cloud tooling, frontend development, and AI integration
           </PageSubtitle>
         </PageHeader>
 
@@ -379,8 +375,8 @@ const MySkillsPage = () => {
             textAlign: 'center'
           }}>
             <img src={WorkspaceSvg} alt="Developer workspace" style={{ width: '100%', maxWidth: '250px', marginBottom: '1rem' }} />
-            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>Full-Stack Development</h4>
-            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Building complete web applications</p>
+            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>Backend Engineering</h4>
+            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Building reliable distributed services</p>
           </div>
           <div style={{
             background: '#1e1e1e',
@@ -390,8 +386,8 @@ const MySkillsPage = () => {
             textAlign: 'center'
           }}>
             <img src={AiBrainSvg} alt="AI and Machine Learning" style={{ width: '100%', maxWidth: '250px', marginBottom: '1rem' }} />
-            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>AI & Machine Learning</h4>
-            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Exploring neural networks and ML</p>
+            <h4 style={{ color: '#faf8f5', fontFamily: 'Space Grotesk, sans-serif', marginBottom: '0.5rem' }}>AI-Powered Applications</h4>
+            <p style={{ color: '#6a6a6a', fontSize: '0.9rem' }}>Integrating AI into useful products</p>
           </div>
         </motion.div>
 

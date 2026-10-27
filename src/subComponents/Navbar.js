@@ -242,14 +242,14 @@ const Navbar = () => {
   return (
     <>
       <Nav>
-        <Logo to="/">DEEPAK</Logo>
+        <Logo to="/">DEEPAK KUMAR</Logo>
 
         <NavLinks>
           <StyledNavLink to="/" end><GlitchText>Home</GlitchText></StyledNavLink>
           <StyledNavLink to="/about"><GlitchText>About</GlitchText></StyledNavLink>
           <StyledNavLink to="/skills"><GlitchText>Skills</GlitchText></StyledNavLink>
           <StyledNavLink to="/work"><GlitchText>Projects</GlitchText></StyledNavLink>
-          <ContactButton href="mailto:dk376907@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
+          <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
         </NavLinks>
 
         <HamburgerButton onClick={toggleMenu} isOpen={isOpen}>
@@ -271,7 +271,7 @@ const Navbar = () => {
             <MobileNavLink to="/about" onClick={closeMenu} data-number="02"><GlitchText>About</GlitchText></MobileNavLink>
             <MobileNavLink to="/skills" onClick={closeMenu} data-number="03"><GlitchText>Skills</GlitchText></MobileNavLink>
             <MobileNavLink to="/work" onClick={closeMenu} data-number="04"><GlitchText>Projects</GlitchText></MobileNavLink>
-            <ContactButton href="mailto:dk376907@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
+            <ContactButton href="mailto:kumardeepakcse22@gmail.com"><GlitchText>Let's Talk</GlitchText></ContactButton>
           </MobileMenu>
         )}
       </AnimatePresence>

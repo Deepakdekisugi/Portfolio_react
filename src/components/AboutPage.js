@@ -259,19 +259,18 @@ const AboutPage = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <BioText>
-              I'm a <Highlight>Full-Stack MERN Developer</Highlight> and engineering student based in India,
-              passionate about building complete web applications from frontend to backend.
+              I'm a <Highlight>Software Engineer and Java Backend Developer</Highlight> based in Bangalore, India,
+              with 2.9 years of experience building reliable backend systems.
             </BioText>
             <BioText>
-              Currently working with <HighlightTeal>MongoDB</HighlightTeal>, <HighlightTeal>Express</HighlightTeal>,
-              <HighlightTeal> React</HighlightTeal>, and <HighlightTeal>Node.js</HighlightTeal> to build
-              production-ready applications. Also exploring <Highlight>AI/ML</Highlight> with Python,
-              neural networks, and machine learning fundamentals.
+              My primary work spans <HighlightTeal>Java</HighlightTeal>, <HighlightTeal>Spring Boot</HighlightTeal>,
+              microservices, REST APIs, <HighlightTeal>Kafka</HighlightTeal>, Redis, MySQL, MongoDB, Docker,
+              AWS, and Jenkins. I also build React interfaces and AI-powered products with secure, maintainable services.
             </BioText>
             <BioText>
-              My journey started with C and algorithms (built a chess engine!), progressed through
-              frontend development, and now I'm going full-stack while diving into AI. I believe in
-              learning by building real projects.
+              I started with C and algorithms, moved through frontend development at Nirvana Studios,
+              and transitioned into backend engineering at TapQwik Software Private Limited. I believe in
+              learning by building production-focused systems and solving problems methodically.
             </BioText>
           </Bio>
 
@@ -281,16 +280,16 @@ const AboutPage = () => {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <StatCard accentcolor="#ff6b6b" whileHover={{ scale: 1.03 }}>
-              <StatNumber color="#ff6b6b">2+</StatNumber>
+              <StatNumber color="#ff6b6b">2.9</StatNumber>
               <StatLabel>Years Experience</StatLabel>
             </StatCard>
             <StatCard accentcolor="#00d4aa" whileHover={{ scale: 1.03 }}>
-              <StatNumber color="#00d4aa">10+</StatNumber>
-              <StatLabel>Projects Done</StatLabel>
+              <StatNumber color="#00d4aa">11</StatNumber>
+              <StatLabel>Featured Projects</StatLabel>
             </StatCard>
             <StatCard accentcolor="#ffd93d" whileHover={{ scale: 1.03 }}>
-              <StatNumber color="#ffd93d">5+</StatNumber>
-              <StatLabel>Happy Clients</StatLabel>
+              <StatNumber color="#ffd93d">2</StatNumber>
+              <StatLabel>Professional Roles</StatLabel>
             </StatCard>
           </StatsGrid>
 
@@ -299,8 +298,11 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <ContactLink href="mailto:dk376907@gmail.com" primary>
+            <ContactLink href="mailto:kumardeepakcse22@gmail.com" primary>
               Get In Touch →
+            </ContactLink>
+            <ContactLink href="https://www.linkedin.com/in/deepak-kumar4/" target="_blank" rel="noopener noreferrer">
+              LinkedIn
             </ContactLink>
             <ContactLink href="/resume.pdf" download>
               Download Resume

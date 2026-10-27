@@ -137,6 +137,23 @@ const ProjectDescription = styled.p`
   margin-bottom: 1.5rem;
 `;
 
+const ProjectMeta = styled.p`
+  color: #00d4aa;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+`;
+
+const ProjectDetails = styled.p`
+  color: #888;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+`;
+
 const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -258,7 +275,7 @@ const WorkPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Engineering projects showcasing algorithms, full-stack development, and machine learning. Built with a focus on practical problem-solving.
+            Backend systems, AI-powered applications, and frontend products built with a focus on reliable engineering and practical problem-solving.
           </PageSubtitle>
         </PageHeader>
 
@@ -277,7 +294,11 @@ const WorkPage = () => {
                     {String(index + 1).padStart(2, '0')}
                   </ProjectNumber>
                   <ProjectTitle data-text={project.name}>{project.name}</ProjectTitle>
+                  <ProjectMeta>
+                    {project.category}{project.period ? ` · ${project.period}` : ''}
+                  </ProjectMeta>
                   <ProjectDescription>{project.description}</ProjectDescription>
+                  {project.details && <ProjectDetails>{project.details}</ProjectDetails>}
                   <TagsContainer>
                     {project.tags.map((tag, tagIndex) => (
                       <Tag key={tagIndex} color={tagColors[tagIndex % tagColors.length]}>
@@ -303,6 +324,11 @@ const WorkPage = () => {
                         rel="noopener noreferrer"
                       >
                         GitHub
+                      </ProjectLink>
+                    )}
+                    {!project.github && !project.demo && (
+                      <ProjectLink as="span" aria-label="Project link pending">
+                        Demo link pending
                       </ProjectLink>
                     )}
                   </LinksContainer>
